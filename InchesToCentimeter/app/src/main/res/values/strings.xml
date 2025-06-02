@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name" translatable="false">InchesToCentimeter</string>
+    <string name="button_convert" translatable="false">Convert</string>
+    <string name="fail">Please enter inches...</string>
+</resources>
