@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">SeekBar</string>
+    <string name="rate">Rate 0</string>
+    <string name="text_label">What is the Rating of this Course</string>
+</resources>
