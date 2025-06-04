@@ -8,10 +8,10 @@
     tools:context=".MainActivity">
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBoxKotlin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
+        android:text="@string/check_box_kotlin"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
@@ -20,45 +20,44 @@
         app:layout_constraintVertical_bias="0.289" />
 
     <CheckBox
-        android:id="@+id/checkBox3"
+        android:id="@+id/checkBoxJava"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
+        android:text="@string/check_box_java"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxKotlin"
         app:layout_constraintVertical_bias="0.036" />
 
     <CheckBox
-        android:id="@+id/checkBox4"
+        android:id="@+id/checkBoxPython"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CheckBox"
+        android:text="@string/check_box_python"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox3"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxJava"
         app:layout_constraintVertical_bias="0.042" />
 
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Button"
+        android:text="@string/button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox4"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxPython"
         app:layout_constraintVertical_bias="0.120000005" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
         android:textSize="28sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -68,12 +67,12 @@
         app:layout_constraintVertical_bias="0.232" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/textViewQuestion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="TextView"
-        android:textSize="28sp"
-        app:layout_constraintBottom_toTopOf="@+id/checkBox"
+        android:text="@string/text_question"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toTopOf="@+id/checkBoxKotlin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
