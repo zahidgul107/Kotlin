@@ -3,14 +3,17 @@ package com.example.activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 
 class MainActivity : AppCompatActivity() {
     private lateinit var goToButton : Button
+    private lateinit var mainActivityTextView : TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,14 +21,25 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this@MainActivity, "onCreate Called", Toast.LENGTH_SHORT).show()
 
         goToButton = findViewById<Button>(R.id.button_go_to_act)
+        mainActivityTextView = findViewById<TextView>(R.id.textView)
+
+        val getResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+                if(it.resultCode == Constants.RESULT_CODE) {
+                    val message = it.data!!.getStringExtra(Constants.INTENT_MESSAGE2_KEY)
+                    mainActivityTextView.text = message
+                }
+            }
 
         goToButton.setOnClickListener {
             val intent = Intent(this@MainActivity, SecondActivity::class.java)
             intent.putExtra(Constants.INTENT_MESSAGE_KEY, "Hello from first Activity")
             intent.putExtra(Constants.INTENT_MESSAGE2_KEY, "How was your day")
             intent.putExtra(Constants.INTENT_DATA_NUMBER, 3.14)
-            startActivity(intent)
+         //   startActivity(intent)
+            getResult.launch(intent)
         }
+
     }
 
 
