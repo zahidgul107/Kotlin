@@ -47,7 +47,7 @@ object Constants {
         val quest4 = Question(
             id = 4,
             question = "What country does this flag belong to?",
-            image = R.drawable.flag_of_brazil,
+            image = R.drawable.flag_of_france,
             optionOne = "Finland",
             optionTwo = "Fiji",
             optionThree = "France",

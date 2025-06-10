@@ -1,10 +1,14 @@
 package com.example.quizapp.ui
 
+import android.content.Context
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.media.Image
+import android.os.Build
 import android.os.Bundle
+import android.os.VibrationEffect
+import android.os.Vibrator
 import android.util.Log
 import android.view.View
 import android.widget.Button
@@ -168,6 +172,7 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
             highlightAnswer(selectedAnswer)
             score++
         } else {
+            vibratePhone()
             when(selectedAnswer) {
                 1 -> {
                     textViewOptionOne.background = ContextCompat.getDrawable(
@@ -230,6 +235,17 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
                     this,
                     R.drawable.correct_border_option_bg
                 )
+            }
+        }
+    }
+
+    private fun vibratePhone() {
+        val vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        if (vibrator.hasVibrator()) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(200, VibrationEffect.DEFAULT_AMPLITUDE))
+            } else {
+                vibrator.vibrate(200)
             }
         }
     }
