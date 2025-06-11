@@ -5,6 +5,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.graphics.Typeface
 import android.media.Image
+import android.media.MediaPlayer
 import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
@@ -16,6 +17,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.activity.enableEdgeToEdge
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
@@ -43,6 +45,8 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
     private var answered = false
     private lateinit var name : String
     private var score = 0
+    private lateinit var wrongAnswerSound : MediaPlayer
+    private lateinit var rightAnswerSound : MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,6 +68,9 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         textViewOptionTwo = findViewById<TextView>(R.id.text_view_option_two)
         textViewOptionThree = findViewById<TextView>(R.id.text_view_option_three)
         textViewOptionFour = findViewById<TextView>(R.id.text_view_option_four)
+
+        wrongAnswerSound = MediaPlayer.create(this, R.raw.wronganswersound)
+        rightAnswerSound = MediaPlayer.create(this, R.raw.rightanswer)
 
         textViewOptionOne.setOnClickListener(this)
         textViewOptionTwo.setOnClickListener(this)
@@ -171,8 +178,10 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
         if(selectedAnswer == currentQuestion.correctOption) {
             highlightAnswer(selectedAnswer)
             score++
+            playRightAnswerSound()
         } else {
             vibratePhone()
+            playWrongAnswerSound()
             when(selectedAnswer) {
                 1 -> {
                     textViewOptionOne.background = ContextCompat.getDrawable(
@@ -249,4 +258,45 @@ class QuestionsActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
     }
+
+    private fun playWrongAnswerSound() {
+        try {
+            if (wrongAnswerSound.isPlaying) {
+                wrongAnswerSound.seekTo(0) // Rewind to start if already playing
+            }
+            wrongAnswerSound.start() // Play the sound
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    private fun playRightAnswerSound() {
+        try {
+            if (rightAnswerSound.isPlaying) {
+                rightAnswerSound.seekTo(0) // Rewind to start if already playing
+            }
+            rightAnswerSound.start() // Play the sound
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+    }
+
+    override fun onBackPressed() {
+        AlertDialog.Builder(this)
+            .setTitle("Exit Quiz?")
+            .setMessage("Are you sure you want to exit? Your progress will be lost.")
+            .setPositiveButton("Exit") { _, _ ->
+                super.onBackPressed()
+                finish()
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
+
+    // Add this to clean up MediaPlayer when activity is destroyed
+    override fun onDestroy() {
+        super.onDestroy()
+        wrongAnswerSound.release()
+    }
+
 }
